@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,8 @@ namespace buter
     {
         string cheatCodething = string.Empty; // Initialize an empty cheat code string
         int thing = 0;
+        Random rnd = new Random();
+        int lov = 0;
 
         public Form1()
         {
@@ -71,6 +74,10 @@ namespace buter
                 cheatCodething = string.Empty;
                 timer1.Stop(); // Stop the timer when the cheat code is activated
             }
+            if (cheatCodething.ToLower().Equals("no"))
+            {
+                var frogot = MessageBox.Show("i frogot", "no", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -88,6 +95,63 @@ namespace buter
         private void Form1_Load(object sender, EventArgs e)
         {
             timer1.Interval = 1000; // 1 second
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (progressBar1.Value >= progressBar1.Maximum)
+            {
+                timer2.Stop();
+                var shi = MessageBox.Show("ur brain overloaded", ":O", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (shi == DialogResult.OK)
+                {
+                    progressBar1.Value = 0;
+                    timer2.Start();
+                }
+            }
+            else
+            {
+                progressBar1.Value = Math.Min(progressBar1.Value + 1, progressBar1.Maximum);
+            }
+        }
+
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var no = MessageBox.Show("did you star th repo?", "are you sure", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (no == DialogResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else if (no == DialogResult.No)
+            {
+                e.Cancel = true;
+                System.Diagnostics.Process.Start("https://github.com/yoann256/buter");
+            }
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            
+            int stuff = rnd.Next(1, 101);
+            Console.WriteLine(stuff / 100.0);
+            this.Opacity = stuff / 100.0;
+        }
+
+        private void petToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lov += rnd.Next(1, 25);
+            var stuf = MessageBox.Show($"buter lov u: {lov}", "lov", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void feedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var stuf = MessageBox.Show("buter is overweight", "fed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
